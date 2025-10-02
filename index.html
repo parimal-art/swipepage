@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Interview Assistant - Documentary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Poppins',sans-serif;background:#0f172a;color:#f1f5f9;line-height:1.6}
+    header{background:linear-gradient(135deg,#1e3a8a,#2563eb);text-align:center;padding:5rem 2rem}
+    header h1{font-size:3rem;font-weight:700;color:#fff}
+    header p{margin-top:1rem;font-size:1.1rem;color:#e2e8f0}
+    nav{position:sticky;top:0;background:#0b1220;z-index:100;border-bottom:1px solid rgba(255,255,255,0.03)}
+    .nav-container{display:flex;justify-content:center;align-items:center;gap:2rem;padding:0.8rem}
+    .nav-links{display:flex;gap:2rem}
+    .nav-links a{color:#e6eef8;text-decoration:none;font-weight:600;padding:0.5rem 0.75rem}
+    .nav-links a:hover{color:#7dd3fc}
+    .hamburger{display:none;font-size:1.5rem;cursor:pointer;color:#e6eef8}
+    main{max-width:1200px;margin:auto;padding:2rem}
+    section{padding:3rem 0}
+    h2{font-size:1.8rem;margin-bottom:1rem;color:#7dd3fc;text-align:left}
+    p,li{color:#cbd5e1;font-size:1rem}
+    .grid{display:grid;gap:2rem}
+    .cols-2{grid-template-columns:repeat(2,1fr);align-items:start}
+    .cols-3{grid-template-columns:repeat(3,1fr)}
+    .card{background:#0f1724;border-radius:12px;padding:1.5rem;box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .card h3{color:#e6eef8;margin-bottom:0.5rem}
+    img,iframe{width:100%;border-radius:10px;display:block;object-fit:contain}
+    .diagram{height:400px}
+    ul{list-style:disc inside;margin-top:0.75rem}
+    .btn{display:inline-block;padding:0.7rem 1.2rem;border-radius:8px;font-weight:700;text-decoration:none}
+    .btn-live{background:#10b981;color:#052e16}
+    .btn-flow{background:#0b1220;color:#e6eef8;border:1px solid rgba(255,255,255,0.03)}
+    footer{text-align:center;color:#94a3b8;padding:2rem 1rem}
+    /* Live card specifics to match left */
+    .live-card{padding:0;overflow:hidden;position:relative;border-radius:12px;min-height:320px;display:flex;align-items:stretch}
+    .live-bg{width:100%;height:100%;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background-repeat:no-repeat;background-size:cover;background-position:left center}
+    .live-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(2,6,23,0.15),rgba(2,6,23,0.55));pointer-events:none}
+    .live-content{position:relative;z-index:1;text-align:center;padding:2rem;width:100%}
+    .try-btn{display:inline-block;background:#10b981;color:#052e16;padding:0.75rem 1.4rem;border-radius:10px;font-weight:700;text-decoration:none;box-shadow:0 6px 18px rgba(2,6,23,0.45)}
+    /* make video and live card equal height in grid */
+    .resources-grid{align-items:stretch}
+    .card.no-pad{padding:0}
+    @media(max-width:900px){
+      .cols-2,.cols-3{grid-template-columns:1fr}
+      .diagram{height:auto}
+      .nav-container{justify-content:space-between;padding:0.8rem 1.5rem}
+      .hamburger{display:block}
+      .nav-links{display:none;flex-direction:column;background:#0b1220;position:absolute;top:100%;right:0;width:100%;text-align:center;padding:1rem 0}
+      .nav-links.show{display:flex}
+      .live-bg{background-position:center}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>AI Interview Assistant</h1>
+  <p>A documentary-style showcase of an AI-powered interview platform</p>
+  <div style="margin-top:1rem;">
+    <a href="#flows-eval" class="btn btn-flow" style="margin-right:0.6rem;">View Project Flow</a>
+    <a href="https://swipe-parimal.vercel.app/" target="_blank" class="btn btn-live">🚀 Explore Live</a>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-container">
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#flows-eval">Flows & Evaluation</a>
+      <a href="#snapshots">Snapshots</a>
+      <a href="#resources">Resources</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<!-- Replace your current #features section with this block -->
+<style>
+  /* Features section styles (drop into page head or main css) */
+  .features-wrap { padding: 3rem 1rem; max-width: 1200px; margin: 0 auto; }
+  .features-header { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1.25rem; }
+  .features-header h2 { color:#7dd3fc; font-size:2rem; margin:0; }
+  .features-sub { color:#9fbfdc; font-size:0.95rem; max-width:720px; }
+
+  .features-grid {
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:1.25rem;
+  }
+
+  .feat-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.03);
+    padding:1.35rem;
+    border-radius:12px;
+    box-shadow: 0 8px 28px rgba(2,6,23,0.55);
+    transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
+    display:flex;
+    gap:1rem;
+    align-items:flex-start;
+  }
+  .feat-card:hover { transform: translateY(-8px); box-shadow: 0 14px 40px rgba(2,6,23,0.65); }
+
+  .feat-icon {
+    flex:0 0 54px;
+    height:54px;
+    border-radius:10px;
+    background: linear-gradient(135deg,#0ea5a4,#7dd3fc);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#052e2e;
+    box-shadow: 0 6px 18px rgba(14,165,164,0.08);
+  }
+
+  .feat-body { flex:1; }
+  .feat-title { color:#e6eef8; font-weight:700; margin-bottom:0.45rem; font-size:1.05rem; }
+  .feat-list { color:#cbd5e1; margin:0; padding-left:1.05rem; font-size:0.95rem; line-height:1.5; }
+  .feat-list li { margin:0.45rem 0; }
+
+  /* subtle ribbon tag for first bullet */
+  .feat-tag { display:inline-block; font-size:0.72rem; color:#052e2e; background:#bbf7d0; padding:4px 8px; border-radius:999px; margin-bottom:0.6rem; font-weight:700; }
+
+  @media (max-width:1000px){
+    .features-grid { grid-template-columns: repeat(1fr); }
+  }
+  @media (max-width:620px){
+    .features-grid { grid-template-columns: 1fr; }
+    .features-header { flex-direction:column; align-items:flex-start; gap:0.5rem; }
+  }
+</style>
+
+<section id="features" class="features-wrap">
+  <div class="features-header">
+    <h2>Core Features</h2>
+  </div>
+
+  <div class="features-grid">
+    <article class="feat-card" aria-label="Candidate Experience">
+      <div class="feat-icon" aria-hidden="true">
+        <!-- simple user SVG -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 12C14.209 12 16 10.209 16 8C16 5.791 14.209 4 12 4C9.791 4 8 5.791 8 8C8 10.209 9.791 12 12 12Z" fill="currentColor"/>
+          <path d="M4 20C4 16.686 7.134 14 11 14H13C16.866 14 20 16.686 20 20V21H4V20Z" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="feat-body">
+        <div class="feat-title">Candidate Experience</div>
+        <ul class="feat-list">
+          <li>Enter interviewer-provided code and upload resume (.txt / .docx).</li>
+          <li>Resume parser extracts name, email, phone; manual edit if missing.</li>
+          <li>Guided instructions and rules before starting.</li>
+          <li>6 timed questions: 2 Easy, 2 Medium, 2 Hard. Sequential flow.</li>
+          <li>Instant feedback per question and final detailed scorecard.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="feat-card" aria-label="Interviewer Tools">
+      <div class="feat-icon" aria-hidden="true" style="background:linear-gradient(135deg,#f59e0b,#f97316);">
+        <!-- simple settings SVG -->
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 15.5C10.07 15.5 8.5 13.93 8.5 12C8.5 10.07 10.07 8.5 12 8.5C13.93 8.5 15.5 10.07 15.5 12C15.5 13.93 13.93 15.5 12 15.5Z" fill="currentColor"/>
+          <path d="M19.43 12.98C19.46 12.66 19.5 12.34 19.5 12C19.5 11.66 19.46 11.34 19.43 11.02L21.54 9.37C21.74 9.21 21.79 8.92 21.66 8.69L19.66 5.31C19.53 5.08 19.27 5 19.04 5.07L16.45 6.02C16 5.67 15.5 5.37 14.94 5.15L14.5 2.5C14.47 2.22 14.24 2 13.96 2H10.04C9.76 2 9.53 2.22 9.5 2.5L9.06 5.15C8.5 5.37 8 5.67 7.55 6.02L4.96 5.07C4.73 5 4.47 5.08 4.34 5.31L2.34 8.69C2.21 8.92 2.26 9.21 2.46 9.37L4.57 11.02C4.54 11.34 4.5 11.66 4.5 12C4.5 12.34 4.54 12.66 4.57 12.98L2.46 14.63C2.26 14.79 2.21 15.08 2.34 15.31L4.34 18.69C4.47 18.92 4.73 19 4.96 18.93L7.55 17.98C8 18.33 8.5 18.63 9.06 18.85L9.5 21.5C9.53 21.78 9.76 22 10.04 22H13.96C14.24 22 14.47 21.78 14.5 21.5L14.94 18.85C15.5 18.63 16 18.33 16.45 17.98L19.04 18.93C19.27 19 19.53 18.92 19.66 18.69L21.66 15.31C21.79 15.08 21.74 14.79 21.54 14.63L19.43 12.98Z" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="feat-body">
+        <div class="feat-title">Interviewer Tools</div>
+        <ul class="feat-list">
+          <li>Create and manage question sets manually or via CSV.</li>
+          <li>Auto-generate Interview and Dashboard codes for sharing.</li>
+          <li>Private dashboard access with code-based auth.</li>
+          <li>Real-time monitoring of candidate progress and status.</li>
+          <li>Detailed view: answers, matched keywords, per-question scores.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="feat-card" aria-label="Tech & Security">
+      <div class="feat-icon" aria-hidden="true" style="background:linear-gradient(135deg,#7c3aed,#60a5fa);">
+        <!-- shield SVG -->
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L4 5V11C4 16.55 7.74 21.74 12 22C16.26 21.74 20 16.55 20 11V5L12 2Z" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="feat-body">
+        <div class="feat-title">Tech & Security</div>
+        <ul class="feat-list">
+          <li>React + Redux Toolkit + Tailwind in frontend. Supabase backend.</li>
+          <li>Automatic file validation and client-side limits.</li>
+          <li>Hashed interview codes and secure data handling.</li>
+          <li>Modular, scalable architecture for future features.</li>
+          <li>Responsive by default; optimized for mobile and desktop.</li>
+          <li>Real-time data synchronization</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- New card: Rule-Based Systems -->
+    <article class="feat-card" aria-label="Rule-Based Systems">
+      <div class="feat-icon" aria-hidden="true" style="background:linear-gradient(135deg,#34d399,#60a5fa);">
+        <!-- simple rules icon SVG -->
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 6H21V8H3V6Z" fill="currentColor"/>
+          <path d="M3 11H21V13H3V11Z" fill="currentColor"/>
+          <path d="M3 16H21V18H3V16Z" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="feat-body">
+        <div class="feat-title">Rule-Based Systems</div>
+        <ul class="feat-list">
+          <li><strong>Speed and efficiency.</strong> No external AI API calls. Near-instant responses for real-time interviews.</li>
+          <li><strong>Customization.</strong> Interviewers add topics and questions by writing rules. No retraining required.</li>
+          <li><strong>Reliability and control.</strong> Enforce exact logic such as auto-cancel on window minimize to protect integrity.</li>
+          <li>Best for structured screening where predictability, low latency, and strict controls matter.</li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+</section>
+  <section id="flows-eval" style="background:linear-gradient(180deg, rgba(16,24,40,0.0), rgba(2,6,23,0.6)); padding:2rem; border-radius:12px;">
+    <div class="grid cols-3">
+      <div class="card">
+        <h2>Candidate Flow</h2>
+        <img src="user2.svg" alt="Candidate Flow" class="diagram">
+      </div>
+      <div class="card">
+        <h2>Interviewer Flow</h2>
+        <img src="interviewer.svg" alt="Interviewer Flow" class="diagram">
+      </div>
+      <div class="card">
+        <h2>Evaluation Logic</h2>
+        <img src="marks.svg" alt="Evaluation Logic" class="diagram">
+      </div>
+    </div>
+  </section>
+
+  <section id="snapshots">
+    <h2>Project Snapshots</h2>
+    <div class="grid cols-2">
+      <img src="Screenshot 2025-10-02 123629.png" alt="Dashboard">
+      <img src="Screenshot 2025-10-02 133108.png" alt="Dashboard">
+      <img src="Screenshot 2025-10-02 123656.png" alt="Create Questions">
+      <img src="Screenshot 2025-10-02 123720.png" alt="Code Generation">
+      <img src="Screenshot 2025-10-02 123816.png" alt="Resume Upload">
+      <img src="Screenshot 2025-10-02 123853.png" alt="Parse Data">
+      <img src="Screenshot 2025-10-02 123930.png" alt="Interview Instructions">
+      <img src="Screenshot 2025-10-02 124104.png" alt="Question Answer">
+      <img src="Screenshot 2025-10-02 124345.png" alt="Answer Evaluation">
+      <img src="Screenshot 2025-10-02 124436.png" alt="Final Answer Generation">
+      <img src="Screenshot 2025-10-02 124504.png" alt="Dashboard 2">
+      <img src="Screenshot 2025-10-02 124520.png" alt="Candidate Details">
+    </div>
+  </section>
+
+  <!-- RESOURCES: video on left, live app on right with screenshot background matching left -->
+  <section id="resources">
+  <h2>Resources</h2>
+
+  <div class="grid cols-2 resources-grid" style="align-items:stretch; gap:2rem;">
+    <!-- Video Demo (left) -->
+    <div class="card"
+         style="min-height:320px; display:flex; flex-direction:column; justify-content:center; padding:1.5rem;">
+      <h3 style="margin-bottom:1rem; color:#e6eef8">Video Demo</h3>
+      <iframe width="100%" height="240" src="https://www.youtube.com/embed/jdzrTmFu354"
+              title="AI Interview Assistant Video" frameborder="0" allowfullscreen
+              style="border-radius:10px; display:block;"></iframe>
+    </div>
+
+    <div class="card"
+     style="min-height:320px; position:relative; padding:1.5rem; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-start;">
+  <h3 style="margin-bottom:1rem; color:#e6eef8">Try Live</h3>
+
+  <!-- image wrapper is the positioning context for overlay and button -->
+  <div style="position:relative; width:100%; height:240px; border-radius:10px; overflow:hidden;">
+    <img src="Screenshot 2025-10-02 123629.png" alt="Live App Screenshot"
+         style="width:100%; height:100%; object-fit:cover; display:block;">
+
+    <!-- overlay for contrast -->
+    <div style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(2,6,23,0.15), rgba(2,6,23,0.6)); pointer-events:none;"></div>
+
+    <!-- centered button (positioned relative to the image wrapper) -->
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2; text-align:center; width:auto;">
+      <a href="https://swipe-parimal.vercel.app/" target="_blank"
+         style="display:inline-block; background:#ef0000; color:#fff; padding:0.8rem 1.6rem; border-radius:10px; font-weight:700; text-decoration:none; box-shadow:0 8px 24px rgba(2,6,23,0.45);">
+        Try Live
+      </a>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+
+
+  <div style="margin-top:1.5rem;" class="card">
+    <h3>Links</h3>
+    <ul>
+      <li><a href="https://youtu.be/jdzrTmFu354" target="_blank">YouTube — Detailed walkthrough</a></li>
+      <li><a href="https://swipe-parimal.vercel.app/" target="_blank">Live app on Vercel</a></li>
+      <li><a href="https://github.com/parimal-art" target="_blank">Author GitHub</a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div>AI Interview Assistant • Documentary</div>
+  <div style="margin-top:0.5rem;color:#9fbfdc;">“The best way to predict the future is to create it.” – Peter Drucker</div>
+</footer>
+
+<script>
+  function toggleMenu(){document.getElementById("navLinks").classList.toggle("show")}
+</script>
+
+</body>
+</html>
